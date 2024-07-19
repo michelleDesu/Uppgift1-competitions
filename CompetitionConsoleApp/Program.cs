@@ -30,8 +30,9 @@ class Program
 
                 foreach (var participant in competition.Participants)
                 {
-                    Console.WriteLine($"Deltagare: {participant.Name}");
+                    Console.WriteLine($"\tDeltagare: {participant.Name}");
                 }
+                Console.WriteLine();
             }
         }
     }
