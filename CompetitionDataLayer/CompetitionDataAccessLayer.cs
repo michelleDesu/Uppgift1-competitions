@@ -19,14 +19,18 @@ namespace CompetitionDataLayer
 
         public IEnumerable<Competition> GetAllCompetitions() 
         {
-            return _appDbContext.Competitions.Include(t => t.Participants).ToList();
+            return _appDbContext.Competitions
+                .Include(t => t.Participants)
+                .OrderBy(c=>c.Name)
+                .ToList();
         }
 
         public Competition GetCompetitionById(Guid id)
         {
             try
             {
-                var competition = _appDbContext.Competitions.FirstOrDefault(c => c.Id == id);
+                var competition = _appDbContext.Competitions
+                    .FirstOrDefault(c => c.Id == id);
                 if (competition == null)
                 {
                     throw new InvalidOperationException($"Competition with ID {id} not found.");

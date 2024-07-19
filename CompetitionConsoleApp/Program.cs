@@ -28,7 +28,7 @@ class Program
             {
                 Console.WriteLine($"Tävling: {competition.Name}");
 
-                foreach (var participant in competition.Participants)
+                foreach (var participant in competition.Participants.OrderBy(p => p.Name))
                 {
                     Console.WriteLine($"\tDeltagare: {participant.Name}");
                 }
@@ -39,6 +39,9 @@ class Program
 
     private static void SeedData(AppDbContext context)
     {
+        context.Database.EnsureDeleted(); 
+        context.Database.EnsureCreated();
+
         var simning = new Competition { Name = "Simmning" };
         var tennis = new Competition { Name = "Tennis" };
         var dans = new Competition { Name = "Dans" };
